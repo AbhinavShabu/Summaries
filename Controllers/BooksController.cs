@@ -17,8 +17,21 @@ namespace Summaries.Controllers
         [HttpPost("AddBook")]
         public IActionResult AddBook(Book book)
         {
-            _service.AddBook(book);
-            return Ok();
+            try
+            {
+                if(book.Author != null && book.Title != null && book.Description != null)
+                {
+                    _service.AddBook(book);
+                    return Ok();
+                }
+                return BadRequest("Book was not added");
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            // _service.AddBook(book);
+            // return Ok();
         }
 
         // Read all books

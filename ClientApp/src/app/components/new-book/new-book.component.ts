@@ -21,6 +21,7 @@ export class NewBookComponent {
     dateRead: null,
   }
   fb: any;
+  showError: boolean = false;
 
   // The code below is inside the constructor
   //  private fb: FormBuilder
@@ -37,5 +38,8 @@ export class NewBookComponent {
         this.router.navigateByUrl("/books");
       }
      })
+    //  this.service.addBook(this.addBookForm).subscribe(error =>{
+    //   this.showError = true;
+    //  })
   }
 }
