@@ -1,0 +1,38 @@
+<div class="update-book">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="title" class="required">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Book Title" name="title" [(ngModel)]="updateBookForm.title">
+        </div>
+        <div class="form-group">
+            <label for="author" class="required">Author</label>
+            <input type="text" class="form-control" id="author" placeholder="Book Author" name="author" [(ngModel)]="updateBookForm.author">
+        </div>
+        <div class="form-group">
+            <label for="description" class="required">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Book Description" name="description" [(ngModel)]="updateBookForm.description">
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="dateStart">Date start</label>
+                    <input type="date" class="form-control" id="dateStart" placeholder="Date Start" name="dateStart" [(ngModel)]="updateBookForm.dateStart">
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="dateRead">Date Read</label>
+                    <input type="date" class="form-control" id="dateRead" placeholder="Date Read" name="dateRead" [(ngModel)]="updateBookForm.dateRead">
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="form-group">
+                    <label for="rate">Rate</label>
+                    <input type="number" min="0" max="5" class="form-control" id="rate" placeholder="Rate" name="rate" [(ngModel)]="updateBookForm.rate">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit">Update</button>
+        <button class="btn btn-default" [routerLink]="['/books']">Cancel</button>
+    </form>
+</div>
