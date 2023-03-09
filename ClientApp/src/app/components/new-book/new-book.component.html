@@ -1,38 +1,56 @@
 <div class="add-book">
-    <form (ngSubmit)="onSubmit()">
+    <!-- <div *ngIf="showError" class="alert alert-danger" role="alert">
+        Book was not added to the library. Try again!
+    </div> -->
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title" class="required">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Book Title" name="title" [(ngModel)]="addBookForm.title">
+            <input type="text" class="form-control" id="title" placeholder="Book Title" 
+            name="title" [(ngModel)]="addBookForm.title" #title="ngModel" required>
+            <div class="text-danger" *ngIf="title.invalid && title.touched">
+                <div *ngIf="title.errors?.['required']">Title is required.</div>
+            </div>
         </div>
         <div class="form-group">
             <label for="author" class="required">Author</label>
-            <input type="text" class="form-control" id="author" placeholder="Book Author" name="author" [(ngModel)]="addBookForm.author">
+            <input type="text" class="form-control" id="author" placeholder="Book Author" 
+            name="author" [(ngModel)]="addBookForm.author" #author="ngModel" required>
+            <div class="text-danger" *ngIf="author.invalid && author.touched">
+                <div *ngIf="author.errors?.['required']">Author is required.</div>
+            </div>
         </div>
         <div class="form-group">
             <label for="description" class="required">Description</label>
-            <input type="text" class="form-control" id="description" placeholder="Book Description" name="description" [(ngModel)]="addBookForm.description">
+            <input type="text" class="form-control" id="description" placeholder="Book Description" 
+            name="description" [(ngModel)]="addBookForm.description" #description="ngModel" required>
+            <div class="text-danger" *ngIf="description.invalid && description.touched">
+                <div *ngIf="description.errors?.['required']">Description is required.</div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4 col-xs-4 col-sm-4">
                 <div class="form-group">
                     <label for="dateStart">Date start</label>
-                    <input type="date" class="form-control" id="dateStart" placeholder="Date Start" name="dateStart" [(ngModel)]="addBookForm.dateStart">
+                    <input type="date" class="form-control" id="dateStart" placeholder="Date Start" 
+                    name="dateStart" [(ngModel)]="addBookForm.dateStart">
                 </div>
             </div>
             <div class="col-md-4 col-xs-4 col-sm-4">
                 <div class="form-group">
                     <label for="dateRead">Date Read</label>
-                    <input type="date" class="form-control" id="dateRead" placeholder="Date Read" name="dateRead" [(ngModel)]="addBookForm.dateRead">
+                    <input type="date" class="form-control" id="dateRead" placeholder="Date Read" 
+                    name="dateRead" [(ngModel)]="addBookForm.dateRead">
                 </div>
             </div>
             <div class="col-md-4 col-xs-4 col-sm-4">
                 <div class="form-group">
                     <label for="rate">Rate</label>
-                    <input type="number" min="0" max="5" class="form-control" id="rate" placeholder="Rate" name="rate" [(ngModel)]="addBookForm.rate">
+                    <input type="number" min="0" max="5" class="form-control" id="rate" placeholder="Rate" 
+                    name="rate" [(ngModel)]="addBookForm.rate">
                 </div>
             </div>
         </div>
-        <button class="btn btn-success" type="submit">Add</button>
+        <button class="btn btn-success" type="submit" [disabled]="form.invalid">Add</button>
         <button class="btn btn-default" [routerLink]="['/books']">Cancel</button>
     </form>
 </div>
