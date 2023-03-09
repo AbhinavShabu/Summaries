@@ -29,7 +29,14 @@ export class BooksComponent implements OnInit {
 
   showBook(id: number) {
     this.router.navigateByUrl("/show-book/"+id);
-    
+  }
+
+  updateBook(id: number) {
+    this.router.navigateByUrl("/update-book/"+id);
+  }
+
+  deleteBook(id: number) {
+    this.router.navigateByUrl("/delete-book/"+id);
   }
   
 }
