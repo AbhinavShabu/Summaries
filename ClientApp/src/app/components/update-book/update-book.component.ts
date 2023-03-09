@@ -29,19 +29,6 @@ export class UpdateBookComponent implements OnInit {
   }
 
   onSubmit(){
-    // console.log(this.updateBookForm.title);
-    // console.log(this.updateBookForm.author);
-    // console.log(this.updateBookForm.description);
-    // console.log(this.updateBookForm.rate);
-  //   this.service.updateBook(this.updateBookForm).subscribe({
-  //     next: (res: any) => {
-  //       console.log(res);
-  //       this.router.navigateByUrl("/books");
-  //     }
-  //    })
-  // }
-
-
     this.service.updateBook(this.updateBookForm.id,this.updateBookForm).subscribe({
       next: (res: any) => {
         console.log(res);
