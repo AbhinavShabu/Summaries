@@ -1,18 +1,29 @@
 <div class="update-book">
-    <form (ngSubmit)="onSubmit()">
+    <form  #form="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title" class="required">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Book Title" name="title" [(ngModel)]="updateBookForm.title">
+            <input type="text" class="form-control" id="title" placeholder="Book Title" 
+            name="title" [(ngModel)]="updateBookForm.title" #title="ngModel" required>
+            <div class="text-danger" *ngIf="title.invalid && title.touched">
+                <div *ngIf="title.errors?.['required']">Title is required.</div>
+            </div>
         </div>
         <div class="form-group">
             <label for="author" class="required">Author</label>
-            <input type="text" class="form-control" id="author" placeholder="Book Author" name="author" [(ngModel)]="updateBookForm.author">
+            <input type="text" class="form-control" id="author" placeholder="Book Author" 
+            name="author" [(ngModel)]="updateBookForm.author" #author="ngModel" required>
+            <div class="text-danger" *ngIf="author.invalid && author.touched">
+                <div *ngIf="author.errors?.['required']">Author is required.</div>
+            </div>
         </div>
         <div class="form-group">
             <label for="description" class="required">Description</label>
-            <textarea type="text" class="form-control" id="description" placeholder="Book Description" name="description" [(ngModel)]="updateBookForm.description">
-                
+            <textarea type="text" class="form-control" id="description" placeholder="Book Description" 
+            name="description" [(ngModel)]="updateBookForm.description" #description="ngModel" required>
             </textarea>
+            <div class="text-danger" *ngIf="description.invalid && description.touched">
+                <div *ngIf="description.errors?.['required']">Description is required.</div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4 col-xs-4 col-sm-4">
@@ -34,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-success" type="submit">Update</button>
-        <button class="btn btn-default" [routerLink]="['/books']">Cancel</button>
+        <button class="btn btn-success mt-2 me-2" type="submit" [disabled]="form.invalid">Update</button>
+        <button class="btn btn-default mt-2" [routerLink]="['/books']">Cancel</button>
     </form>
 </div>
