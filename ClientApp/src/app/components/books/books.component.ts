@@ -9,19 +9,13 @@ import { BookService } from 'src/app/services/book.service';
 })
 export class BooksComponent implements OnInit {
 
-  // There is a chance of error appearing here.
   books: any;
 
   constructor(private service: BookService,
               private router: Router) { }
 
+  // Shows the data of books
   ngOnInit() {
-    // this.service.getAllBooks().subscribe({
-    //   next : (res: any) => {
-    //     this.books = res;
-    //   }
-    // })
-    // The code above also works
     this.service.getAllBooks().subscribe(data => {
       this.books = data;
     })
