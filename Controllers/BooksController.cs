@@ -30,8 +30,6 @@ namespace Summaries.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            // _service.AddBook(book);
-            // return Ok();
         }
 
         // Read all books
