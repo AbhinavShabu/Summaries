@@ -14,7 +14,7 @@ namespace Summaries.Controllers
         //    _service = service;
         //}
 
-        private SummariesDbContext _summariesDbContext;
+    private SummariesDbContext _summariesDbContext;
 
         public BooksController(SummariesDbContext summariesDbContext) 
         {
