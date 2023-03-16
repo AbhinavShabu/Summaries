@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Summaries.Data;
 
 namespace Summaries.Controllers
@@ -7,61 +8,64 @@ namespace Summaries.Controllers
     [ApiController]
     public class BooksController: Controller
     {
-        private IBookService _service;
-        public BooksController(BookService service)
+        //private IBookService _service;
+        //public BooksController(BookService service)
+        //{
+        //    _service = service;
+        //}
+
+        private SummariesDbContext _summariesDbContext;
+
+        public BooksController(SummariesDbContext summariesDbContext) 
         {
-            _service = service;
+            _summariesDbContext = summariesDbContext;
         }
 
         // Create or add new books
         [HttpPost("AddBook")]
-        public IActionResult AddBook(Book book)
+        public async Task<IActionResult> AddBook([FromBody]Book book)
         {
-            try
-            {
-                if(book.Author != null && book.Title != null && book.Description != null)
-                {
-                    _service.AddBook(book);
-                    return Ok();
-                }
-                return BadRequest("Book was not added");
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+                    await _summariesDbContext.Books.AddAsync(book);
+                    await _summariesDbContext.SaveChangesAsync();
+                    return Ok(book);
         }
 
         // Read all books
         [HttpGet("[Action]")]
-        public IActionResult GetBooks()
+        public async Task<IActionResult> GetBooks()
         {
-            var allBooks = _service.GetAllBooks();
+            var allBooks = await _summariesDbContext.Books.ToListAsync();
             return Ok(allBooks);
         }
 
         // Update an existing book
         [HttpPut("UpdateBook")]
-        public IActionResult UpdateBook(Book book)
+        public async Task<IActionResult> UpdateBook(int id,[FromBody]Book book)
         {
-            _service.UpdateBook(book);
-            return Ok(book);
+            var update = await _summariesDbContext.Books.FindAsync(id);
+            //await _summariesDbContext.Books.AddAsync(book);
+            //await _summariesDbContext.SaveChangesAsync();
+
+            return Ok(update);
         }
 
         // Delete a Book
         [HttpDelete("DeleteBook/{id}")]
-        public IActionResult DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(int id)
         {
-            _service.DeleteBook(id);
+            var book = await _summariesDbContext.Books.FirstAsync(x => x.Id == id);
+            _summariesDbContext.Books.Remove(book);
+            await _summariesDbContext.SaveChangesAsync();
             return Ok();
         }
 
         // Get a single book by id
         [HttpGet("SingleBook/{id}")]
-        public IActionResult GetBookById(int id)
+        public async Task<IActionResult> GetBookById(int id)
         {
-            var book = _service.GetBookById(id);
+            var book = await _summariesDbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
             return Ok(book);
         }
+
     }
 }

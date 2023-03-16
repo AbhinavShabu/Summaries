@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Summaries.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<BookService>();
+
+builder.Services.AddDbContext<SummariesDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SummariesConnectionString")));
 
 var app = builder.Build();
 
