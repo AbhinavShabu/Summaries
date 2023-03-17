@@ -56,26 +56,7 @@ namespace Summaries.Controllers
             await _summariesDbContext.SaveChangesAsync();
             return Ok();
 
-            //var oldBook = await _summariesDbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
-            //var oldBook = await _summariesDbContext.Books.FindAsync(id);
-            //await _summariesDbContext.Books.AddAsync(newBook);
-
-            //if (oldBook == null)
-            //{
-            //    return NotFound();
-            //}
-
-
-            //oldBook.Title = newBook.Title;
-            //oldBook.Author = newBook.Author;
-            //oldBook.Description = newBook.Description;
-            //oldBook.Rate = newBook.Rate;
-            //oldBook.DateStart = newBook.DateStart;
-            //oldBook.DateRead = newBook.DateRead;
-
-            //await _summariesDbContext.SaveChangesAsync();
-
-            //return Ok();
+            
         }
 
         // Delete a Book
