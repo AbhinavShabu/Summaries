@@ -23,13 +23,15 @@ export class UpdateBookComponent implements OnInit {
   ngOnInit(): void { 
     this.service.getBookById(this.route.snapshot.params.id).subscribe({
     next: (res:any) => {
+      console.log(res);
+      this.updateBookForm.id = res.id;
       this.updateBookForm = res;
     }
     })
   }
 
   onSubmit(){
-    this.service.updateBook(this.updateBookForm.id,this.updateBookForm).subscribe({
+    this.service.updateBook(this.updateBookForm).subscribe({
       next: (res: any) => {
         console.log(res);
         this.router.navigateByUrl("/books");
