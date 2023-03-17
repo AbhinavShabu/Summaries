@@ -22,8 +22,9 @@ export class BookService {
     return this.http.get(this._baseURL+"/SingleBook/"+id)
   }
 
-  updateBook(id: number,book: any[]){
+  updateBook(book: any[]){
     return this.http.put(this._baseURL+"/UpdateBook", book);
+    
   }
   
   deleteBook(id: number){
